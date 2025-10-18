@@ -16,27 +16,30 @@ import java.util.Set;
 @Entity
 public class Movie {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer movieId;
+
     @Column(nullable = false, length = 100)
     @NotBlank(message = "Please provide movie's title!")
     private String title;
+
     @Column(nullable = false, length = 100)
     @NotBlank(message = "Please provide movie's director!")
     private String director;
-    @Column(nullable = false, length = 100)
-    @NotBlank(message = "Please provide movie's rating!")
-    private String rating;
+
     @Column(nullable = false, length = 100)
     @NotBlank(message = "Please provide movie's studio!")
     private String studio;
+
     @ElementCollection
     @CollectionTable(name = "movie_cast")
     private Set<String> movieCast;
-    @Column(nullable = false, length = 100)
+
+    @Column(nullable = false)
     @NotBlank(message = "Please provide movie's release year!")
-    private Integer releaseYear;
-    @Column(nullable = false, length = 100)
+    private String releaseYear;
+
+    @Column(nullable = false)
     @NotBlank(message = "Please provide movie's poster!")
     private String poster;
 }

@@ -2,7 +2,6 @@ package com.nggiabao2004.MovieAPI.controllers;
 
 import com.nggiabao2004.MovieAPI.services.FileService;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,14 +15,17 @@ import java.io.InputStream;
 @RestController
 @RequestMapping("/file/")
 public class FileController {
-    @Autowired
-    private FileService fileService;
+    private final FileService fileService;
+
+    public FileController(FileService fileService) {
+        this.fileService = fileService;
+    }
 
     @Value("${project.poster}")
     private String path;
 
     @PostMapping("/upload")
-    public ResponseEntity<String> uploadFileHandler(@RequestParam("file") MultipartFile file) throws IOException {
+    public ResponseEntity<String> uploadFileHandler(@RequestParam MultipartFile file) throws IOException {
         String uploadedFileName = fileService.uploadFiLe(path, file);
         return ResponseEntity.ok("File uploaded: " + uploadedFileName);
     }
@@ -34,6 +36,4 @@ public class FileController {
         response.setContentType(MediaType.IMAGE_PNG_VALUE);
         StreamUtils.copy(resourceFile, response.getOutputStream());
     }
-
-
 }

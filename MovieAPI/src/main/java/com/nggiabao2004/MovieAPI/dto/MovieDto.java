@@ -2,6 +2,7 @@ package com.nggiabao2004.MovieAPI.dto;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,15 +18,13 @@ public class MovieDto {
     private String title;
     @NotBlank(message = "Please provide movie's director!")
     private String director;
-    @NotBlank(message = "Please provide movie's rating!")
-    private String rating;
     @NotBlank(message = "Please provide movie's studio!")
     private String studio;
-    @ElementCollection
-    @CollectionTable(name = "movie_cast")
     private Set<String> movieCast;
-    @NotBlank(message = "Please provide movie's release year!")
-    private Integer releaseYear;
+    @Pattern(regexp = "\\d{4}", message = "Release year must be 4 numbers!")
+    private String releaseYear;
     @NotBlank(message = "Please provide movie's poster!")
     private String poster;
+    @NotBlank(message = "Please provide movie's poster's url!")
+    private String posterUrl;
 }

@@ -1,0 +1,41 @@
+CREATE DATABASE movie_api_db;
+USE movie_api_db;
+
+CREATE TABLE movie (
+    movie_id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    director VARCHAR(255) NOT NULL,
+    studio VARCHAR(255) NOT NULL,
+    release_year INT NOT NULL,
+    poster VARCHAR(255) NOT NULL,
+    poster_url VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE movie_cast (
+    movie_id INT,
+    actor_name VARCHAR(255) NOT NULL,
+    FOREIGN KEY (movie_id) REFERENCES movie(movie_id) ON DELETE CASCADE
+);
+
+INSERT INTO movie (title, director, studio, release_year, poster, poster_url)
+VALUES
+('Coco', 'Lee Unkrich, Adrian Molina', 'Pixar Animation Studios', 2017, 'coco_poster.jpg', 'https://www.example.com/coco_poster.jpg'),
+('Wall-E', 'Andrew Stanton', 'Pixar Animation Studios', 2008, 'walle_poster.jpg', 'https://www.example.com/walle_poster.jpg'),
+('Flow', 'TBD', 'TBD', 2025, 'flow_2025_poster.jpg', 'https://www.example.com/flow_2025_poster.jpg');
+
+INSERT INTO movie_cast (movie_id, actor_name)
+VALUES
+(1, 'Anthony Gonzalez'),
+(1, 'Gael García Bernal'),
+(1, 'Benjamin Bratt'),
+(1, 'Renée Victor'),
+(2, 'Ben Burtt'),
+(2, 'Elissa Knight'),
+(2, 'Jeff Garlin'),
+(2, 'Fred Willard');
+
+-- Kiểm tra bảng movie
+SELECT * FROM movie;
+
+-- Kiểm tra bảng movie_cast
+SELECT * FROM movie_cast;
